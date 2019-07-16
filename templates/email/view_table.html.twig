@@ -1,0 +1,24 @@
+<table border="1" cellpadding="5">
+    <thead>
+    <tr>
+        {% for variable in items[0:1]  %}
+            {% for element in variable %}
+                <th>{{ element }}</th>
+            {% endfor %}
+        {% endfor %}
+    </tr>
+    </thead>
+    <tbody>
+    {% for variable in items[1:]  %}
+        {% for element in variable %}
+            <tr>
+
+                {% for el in element %}
+                    <td>{{ el }}</td>
+                {% endfor %}
+
+            </tr>
+        {% endfor %}
+    {% endfor %}
+    </tbody>
+</table>

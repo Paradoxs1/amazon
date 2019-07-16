@@ -1,0 +1,26 @@
+# 0. Cron every minute to process The queue
+* * * * * /usr/bin/php /home/webuser/amazon_crawler/bin/console app:crawlingUrl:parse >> /home/webuser/amazon_crawler/cron_log/app_crawlingUrl_parse.log
+
+# 1. Cron at 0th minute of every hour to form QUEUE for initial creating of reviews
+0 * * * * /usr/bin/php /home/webuser/amazon_crawler/bin/console app:tracking:reviews:create >> /home/webuser/amazon_crawler/cron_log/app_tracking_reviews_create.log
+
+# 2. Cron at 25th minute of every hour to form QUEUE for parsing products information
+25 * * * 1 /usr/bin/php /home/webuser/amazon_crawler/bin/console app:tracking:products:parse >> /home/webuser/amazon_crawler/cron_log/app_tracking_products_parse.log
+
+# 3. Cron at 50th minute of every hour to form QUEUE for updating reviews
+50 * * * 1 /usr/bin/php /home/webuser/amazon_crawler/bin/console app:tracking:reviews:update >> /home/webuser/amazon_crawler/cron_log/app_tracking_reviews_update.log
+
+# 4. Cron every 2 minutes to restart failed queue elements
+*/2 * * * * /usr/bin/php /home/webuser/amazon_crawler/bin/console app:crawlingUrl:restartFailed >> /home/webuser/amazon_crawler/cron_log/app_crawlingUrl_restartFailed.log
+
+# 5. Cron every 5 minutes to restart failed queues
+*/5 * * * * /usr/bin/php /home/webuser/amazon_crawler/bin/console app:crawlingQueue:restartFailed >> /home/webuser/amazon_crawler/cron_log/app_crawlingQueue_restartFailed.log
+
+# 6. Report with app stats at 23:57
+57 23 * * 7 /usr/bin/php /home/webuser/amazon_crawler/bin/console app:stats:view --sendReport email >> /home/webuser/amazon_crawler/cron_log/app_stats_view_sendReport.log
+
+# 7. Report with app stats at 23:58
+58 23 * * 7 /usr/bin/php /home/webuser/amazon_crawler/bin/console app:log:analyze --sendReport email >> /home/webuser/amazon_crawler/cron_log/app_log_analyze_sendReport.log
+
+# 8. Cron every sunday at 23:59 to rotate logs
+59 23 * * 7 /usr/bin/php /home/webuser/amazon_crawler/bin/console app:log:rotate >> /home/webuser/amazon_crawler/cron_log/app_log_rotate.log

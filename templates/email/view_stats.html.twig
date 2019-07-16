@@ -1,0 +1,4 @@
+{% for tableName, tableData in dataTables %}
+    <p>{{ baseTableTitle }} {{ tableName }}s.</p>
+    {% include 'email/view_table.html.twig' with {'items' : tableData} %}
+{% endfor %}

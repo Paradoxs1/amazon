@@ -1,0 +1,3 @@
+[submodule "src/BaseScraperBundle"]
+	path = src/BaseScraperBundle
+	url = https://gitlab.it-duck.com/root/base_scraper_bundle.git

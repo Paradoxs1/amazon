@@ -1,0 +1,16 @@
+<table border="1">
+    <thead>
+        <tr>
+            <th>Entity Id</th>
+            <th>Entity class</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td>{{ entity.id }}</td>
+                <td>{{ entity.class }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
